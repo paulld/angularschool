@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="store">
+  <head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+  </head>
+  <body>
+  
+    <div ng-controller="PeopleController as people">
+      <h1>{{people.person.name}}</h1>
+      <p><strong>Description:</strong> {{people.person.description}}</p>
+      <p><strong>Age:</strong> {{people.person.age}}</p>
+      <p><strong>price:</strong> ${{people.person.price}}</p>
+    </div>
+
+
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+  </body>
+</html>
