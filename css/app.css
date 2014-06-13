@@ -1,0 +1,17 @@
+.gallery {
+}
+.gallery-thumb {
+  margin: 0 6px 6px 0;
+  display: inline-block;
+}
+.people-show {
+  margin-bottom: 15px;
+  padding: 5px 0;
+  border: 1px solid #e1e1e8;
+  border-radius: 4px;
+  height: 312px;
+}
+.description {
+  text-align: justify;
+  margin-right: 10px;
+}
