@@ -10,27 +10,33 @@
   </head>
   <body>
     <div ng-controller="PeopleController as people" class="container">
-      <div ng-controller="TabController as tab" class="row">
+      <div class="row">
         <h1>Current staff:</h1>
-        <div ng-repeat="person in people.persons | orderBy:'-salary'" ng-hide="person.leftCompany" class="row people-show">
-          <div class="col-md-4">
-            <h2><strong>Name: </strong>{{person.name | uppercase}}</h2>
-            <ul class="nav nav-pills">
-              <li ng-class="{ active: tab.isSelected(1) }">
-                <a href ng-click="tab.selectTab(1)">Details</a>
-              </li>
-              <li ng-class="{ active: tab.isSelected(2) }">
-                <a href ng-click="tab.selectTab(2)">Description</a>
-              </li>
-              <li ng-class="{ active: tab.isSelected(3) }">
-                <a href ng-click="tab.selectTab(3)">Gallery</a>
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-8">
+        <div ng-repeat="person in people.persons | orderBy:'-salary'" ng-hide="person.leftCompany" class="col-md-6 people-show">
+          <h2><strong>Name: </strong>{{person.name | uppercase}}</h2>
+
+          <div ng-controller="TabController as tab" class="row">
+
+            <div class="row person-nav">
+              <ul class="nav nav-pills">
+                <li ng-class="{ active: tab.isSelected(1) }">
+                  <a href ng-click="tab.selectTab(1)">Details</a>                          <!-- "tab = 1" -->
+                </li>
+                <li ng-class="{ active: tab.isSelected(2) }">
+                  <a href ng-click="tab.selectTab(2)">Description</a>                      <!-- "tab = 2" -->
+                </li>
+                <li ng-class="{ active: tab.isSelected(3) }">
+                  <a href ng-click="tab.selectTab(3)">Gallery</a>                          <!-- "tab = 3" -->
+                </li>
+                <li ng-class="{ active: tab.isSelected(4) }">
+                  <a href ng-click="tab.selectTab(4)">Reviews</a>                          <!-- "tab = 4" -->
+                </li>
+              </ul>
+            </div>
+
             <div class="row">
 
-              <div ng-show="tab.isSelected(1)">
+              <div ng-show="tab.isSelected(1)">                                        <!-- "tab === 1" -->
                 <p><strong>Based in: </strong>{{person.homwTown}}</p>
                 <p><strong>Age: </strong>{{person.age}}</p>
                 <p><strong>Employment date: </strong>{{person.employmentDate | date:'dd/MM/yyyy'}}</p>
@@ -39,24 +45,65 @@
                 <button ng-show="person.canBeFired" class="btn">Fire him</button>
               </div>
 
-              <div ng-show="tab.isSelected(2)">
-                <p><strong>Description:</strong></p>
+              <div ng-show="tab.isSelected(2)">                                      <!-- "tab === 2" -->
+                <h4>Description:</h4>
                 <p class="description">{{person.description}}</p>
               </div>
 
-              <div ng-show="tab.isSelected(3)" ng-controller="GalleryController as gallery">
+              <div ng-show="tab.isSelected(3)" ng-controller="GalleryController as gallery">  <!-- "tab === 3" -->
                 <div ng-show="person.images.length > 0" class="gallery">
-                  <div class="col-md-5">
-                    <img ng-src="{{person.images[gallery.current].full}}">
-                  </div>
-                  <div class="col-md-7" max-height="300px">
+                  <!-- <div class="row"> -->
                     <div ng-repeat="image in person.images" class="gallery-thumb">
-                      <!-- <a ng-click="gallery.selectPicture"> -->
+                      <a href ng-click="gallery.setCurrent(image.full)">
                         <img ng-src="{{image.thumb}}">
-                      <!-- </a> -->
+                      </a>
                     </div>
+                  <!-- </div> -->
+                  <!-- <div class="row"> -->
+                    <!-- <div ng-repeat="image in person.images">
+                      <img ng-show="{{gallery.isCurrent(image)}}" ng-src="{{image.full}}">
+                    </div> -->
+                  <div class="gallery-main">
+                    <img ng-src="{{gallery.current}}">             <!-- {{product.images[gallery.current]}} -->
                   </div>
+                  <!-- </div> -->
                 </div>
+              </div>
+                                                                                      <!-- "tab === 4" -->
+              <div ng-show="tab.isSelected(4)">
+                <ul class="list-unstyled">
+                  <h4>Reviews</h4>
+                  <li ng-repeat="review in person.reviews">
+                    <blockquote>
+                      <strong>{{review.stars}} Stars</strong>
+                      {{review.comment}}
+                      <cite> - by {{review.commentor}}</cite>
+                    </blockquote>
+                  </li>
+                </ul>
+
+                <form name="reviewForm" class="form-inline" ng-controller="ReviewController as ReviewCtrl"
+                                                            ng-submit="ReviewCtrl.addReview(person)">
+                  <blockquote>
+                    <b>{{ReviewCtrl.review.stars}} Stars</b>
+                    {{ReviewCtrl.review.comment}}
+                    <cite> - by {{ReviewCtrl.review.commentor}}</cite>
+                  </blockquote>
+                  <div class="form-group">
+                    <select class="form-control" ng-options="stars for stars in [5,4,3,2,1]"  title="Stars" ng-model="ReviewCtrl.review.stars">
+                      <option value="">Rate him</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="comment" class="sr-only">Your Comment</label>
+                    <input id="comment" placeholder="Your Comment" type="text" class="form-control" ng-model="ReviewCtrl.review.comment">
+                  </div>
+                  <div class="form-group">
+                    <label for="commentor" class="sr-only">Your name</label>
+                    <input id="commentor" placeholder="Your name" type="text" class="form-control form-your-name" ng-model="ReviewCtrl.review.commentor">
+                  </div>
+                  <input type="submit" value="submit" class="btn btn-default" />
+                </form>
               </div>
 
             </div>

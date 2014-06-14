@@ -1,17 +1,27 @@
+.person-nav {
+  width : 80%; 
+  margin: 0 auto 20px;
+  text-align: center;
+
+}
 .gallery {
+  text-align: center;
 }
 .gallery-thumb {
   margin: 0 6px 6px 0;
   display: inline-block;
 }
 .people-show {
-  margin-bottom: 15px;
-  padding: 5px 0;
+  padding: 10px 55px;
+  margin: 0 5px 10px;
   border: 1px solid #e1e1e8;
   border-radius: 4px;
-  height: 312px;
+  width: 48%;
 }
 .description {
   text-align: justify;
   margin-right: 10px;
+}
+.form-control.form-your-name {
+  width: 135px;
 }
