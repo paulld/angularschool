@@ -1,6 +1,7 @@
 (function(){
   var app = angular.module('people', []);
 
+// CONTROLLERS:
   app.controller('PeopleController', function(){
     this.persons = persons;
   });
@@ -16,27 +17,7 @@
     };
   });
 
-  app.controller('GalleryController', function(){
-    this.current = 0;
-    this.setCurrent = function(picture){
-      this.current = picture ? picture : 0;           // this.current = newGallery || 0;
-    };
-    this.isCurrent = function(picture){
-      return this.current = picture;
-    };
-  });
-
-  app.controller('ReviewController', function(){
-    this.review = {};
-
-    this.addReview = function(person){
-      this.review.createdOn = Date.now();
-      person.reviews.push(this.review);
-      this.review = {};      
-    };
-  });
-
-// DIRECTIVES:
+// DIRECTIVES:    (NB: could use ng-include="'templates/person-details.html'" instead of the directive element)
   app.directive('personDetails', function(){
     return {
       restrict: 'E',
@@ -54,7 +35,17 @@
   app.directive('personGallery', function(){
     return {
       restrict: 'E',
-      templateUrl: 'templates/person-gallery.html'
+      templateUrl: 'templates/person-gallery.html',
+      controller: function(){                         // NB: Directive includes a Controller and its alias
+        this.current = 0;
+        this.setCurrent = function(picture){
+          this.current = picture ? picture : 0;           // this.current = newGallery || 0;
+        };
+        this.isCurrent = function(picture){
+          return this.current = picture;
+        };
+      },
+      controllerAs: 'gallery'
     }
   });
 
@@ -68,10 +59,20 @@
   app.directive('personNewReview', function(){
     return {
       restrict: 'E',
-      templateUrl: 'templates/person-new-review.html'
+      templateUrl: 'templates/person-new-review.html',
+      controller: function(){                           // NB: Directive includes a Controller and its alias
+        this.review = {};
+        this.addReview = function(person){
+          this.review.createdOn = Date.now();
+          person.reviews.push(this.review);
+          this.review = {};      
+        };
+      },
+      controllerAs: 'ReviewCtrl'
     }
   });
 
+// MODEL:
   var persons = [
     {
       name: "Bob",

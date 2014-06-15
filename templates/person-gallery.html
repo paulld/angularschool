@@ -1,19 +1,17 @@
-<div ng-controller="GalleryController as gallery">
-  <div ng-show="person.images.length > 0" class="gallery">
-    <!-- <div class="row"> -->
-      <div ng-repeat="image in person.images" class="gallery-thumb">
-        <a href ng-click="gallery.setCurrent(image.full)">
-          <img ng-src="{{image.thumb}}">
-        </a>
-      </div>
-    <!-- </div> -->
-    <!-- <div class="row"> -->
-      <!-- <div ng-repeat="image in person.images">
-        <img ng-show="{{gallery.isCurrent(image)}}" ng-src="{{image.full}}">
-      </div> -->
-    <div class="gallery-main">
-      <img ng-src="{{gallery.current}}">             <!-- {{product.images[gallery.current]}} -->
+<div ng-show="person.images.length > 0" class="gallery">
+  <!-- <div class="row"> -->
+    <div ng-repeat="image in person.images" class="gallery-thumb">
+      <a href ng-click="gallery.setCurrent(image.full)">
+        <img ng-src="{{image.thumb}}">
+      </a>
     </div>
-    <!-- </div> -->
+  <!-- </div> -->
+  <!-- <div class="row"> -->
+    <!-- <div ng-repeat="image in person.images">
+      <img ng-show="{{gallery.isCurrent(image)}}" ng-src="{{image.full}}">
+    </div> -->
+  <div class="gallery-main">
+    <img ng-src="{{gallery.current}}">             <!-- {{product.images[gallery.current]}} -->
   </div>
+  <!-- </div> -->
 </div>
