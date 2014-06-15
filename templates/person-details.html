@@ -1,0 +1,6 @@
+<p><strong>Based in: </strong>{{person.homwTown}}</p>
+<p><strong>Age: </strong>{{person.age}}</p>
+<p><strong>Employment date: </strong>{{person.employmentDate | date:'dd/MM/yyyy'}}</p>
+<p><strong>Salary: </strong>{{person.salary | currency}}</p>
+<button class="btn">Raise him</button>
+<button ng-show="person.canBeFired" class="btn">Fire him</button>

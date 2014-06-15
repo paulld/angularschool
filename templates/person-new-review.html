@@ -1,0 +1,39 @@
+<form name="reviewForm"
+      class="form-inline"
+      ng-controller="ReviewController as ReviewCtrl"
+      ng-submit="reviewForm.$valid && ReviewCtrl.addReview(person)"
+      novalidate>
+  <blockquote class="blockquote-reviews">
+    <b>{{ReviewCtrl.review.stars}} Stars</b>
+    {{ReviewCtrl.review.comment}}
+    <cite> - by {{ReviewCtrl.review.commentor}}</cite>
+  </blockquote>
+  <div class="form-group">
+    <select class="form-control"
+            title="Stars"
+            ng-options="stars for stars in [5,4,3,2,1]"
+            ng-model="ReviewCtrl.review.stars"
+            required>
+      <option value="">Rate him</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="comment" class="sr-only">Your Comment</label>
+    <input id="comment"
+            placeholder="Your Comment"
+            type="text"
+            class="form-control"
+            ng-model="ReviewCtrl.review.comment"
+            required>
+  </div>
+  <div class="form-group">
+    <label for="commentor" class="sr-only">Your email</label>
+    <input id="commentor"
+            placeholder="Your email"
+            class="form-control form-your-name"
+            type="email"
+            ng-model="ReviewCtrl.review.commentor"
+            required>
+  </div>
+  <input type="submit" value="submit" class="btn btn-default" />
+</form>

@@ -1,0 +1,11 @@
+<ul class="list-unstyled">
+  <h4>Reviews</h4>
+  <li ng-repeat="review in person.reviews">
+    <blockquote class="blockquote-reviews">
+      <strong>{{review.stars}} Stars</strong>
+      {{review.comment}}
+      <cite> - by {{review.commentor}} on {{review.createdOn | date}}</cite>
+    </blockquote>
+  </li>
+</ul>
+<person-new-review></person-new-review>

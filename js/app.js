@@ -7,7 +7,7 @@
 
   app.controller('TabController', function(){
     this.currentTab = 1;
-    
+
     this.selectTab = function(newTab){
       this.currentTab = newTab;
     };
@@ -30,9 +30,46 @@
     this.review = {};
 
     this.addReview = function(person){
+      this.review.createdOn = Date.now();
       person.reviews.push(this.review);
       this.review = {};      
     };
+  });
+
+// DIRECTIVES:
+  app.directive('personDetails', function(){
+    return {
+      restrict: 'E',
+      templateUrl: 'templates/person-details.html'
+    }
+  });
+
+  app.directive('personDescription', function(){
+    return {
+      restrict: 'E',
+      templateUrl: 'templates/person-description.html'
+    }
+  });
+
+  app.directive('personGallery', function(){
+    return {
+      restrict: 'E',
+      templateUrl: 'templates/person-gallery.html'
+    }
+  });
+
+  app.directive('personReviews', function(){
+    return {
+      restrict: 'E',
+      templateUrl: 'templates/person-reviews.html'
+    }
+  });
+
+  app.directive('personNewReview', function(){
+    return {
+      restrict: 'E',
+      templateUrl: 'templates/person-new-review.html'
+    }
   });
 
   var persons = [
@@ -59,12 +96,14 @@
         {
           stars: 2,
           comment: "nice guy",
-          commentor: "John"
+          commentor: "John@x.com",
+          createdOn: '1368123412323'
         },
         {
           stars: 4,
           comment: "great guy",
-          commentor: "Jimmy"
+          commentor: "Jimmy@x.com",
+          createdOn: '1368123412323'
         },
       ]
     },
@@ -87,12 +126,14 @@
         {
           stars: 5,
           comment: "Great!",
-          commentor: "John"
+          commentor: "John@x.com",
+          createdOn: '1368123412323'
         },
         {
           stars: 4,
           comment: "great guy",
-          commentor: "Jimmy"
+          commentor: "Jimmy@x.com",
+          createdOn: '1368123412323'
         },
       ]
     },
@@ -123,12 +164,14 @@
         {
           stars: 1,
           comment: "Should do better",
-          commentor: "John"  
+          commentor: "John@x.com",
+          createdOn: '1368123412323'
         },
         {
           stars: 2,
           comment: "Fire him!",
-          commentor: "Jimmy"
+          commentor: "Jimmy@x.com",
+          createdOn: '1368123412323'
         },
       ]
     },

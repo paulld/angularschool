@@ -35,77 +35,10 @@
             </div>
 
             <div class="row">
-
-              <div ng-show="tab.isSelected(1)">                                        <!-- "tab === 1" -->
-                <p><strong>Based in: </strong>{{person.homwTown}}</p>
-                <p><strong>Age: </strong>{{person.age}}</p>
-                <p><strong>Employment date: </strong>{{person.employmentDate | date:'dd/MM/yyyy'}}</p>
-                <p><strong>Salary: </strong>{{person.salary | currency}}</p>
-                <button class="btn">Raise him</button>
-                <button ng-show="person.canBeFired" class="btn">Fire him</button>
-              </div>
-
-              <div ng-show="tab.isSelected(2)">                                      <!-- "tab === 2" -->
-                <h4>Description:</h4>
-                <p class="description">{{person.description}}</p>
-              </div>
-
-              <div ng-show="tab.isSelected(3)" ng-controller="GalleryController as gallery">  <!-- "tab === 3" -->
-                <div ng-show="person.images.length > 0" class="gallery">
-                  <!-- <div class="row"> -->
-                    <div ng-repeat="image in person.images" class="gallery-thumb">
-                      <a href ng-click="gallery.setCurrent(image.full)">
-                        <img ng-src="{{image.thumb}}">
-                      </a>
-                    </div>
-                  <!-- </div> -->
-                  <!-- <div class="row"> -->
-                    <!-- <div ng-repeat="image in person.images">
-                      <img ng-show="{{gallery.isCurrent(image)}}" ng-src="{{image.full}}">
-                    </div> -->
-                  <div class="gallery-main">
-                    <img ng-src="{{gallery.current}}">             <!-- {{product.images[gallery.current]}} -->
-                  </div>
-                  <!-- </div> -->
-                </div>
-              </div>
-                                                                                      <!-- "tab === 4" -->
-              <div ng-show="tab.isSelected(4)">
-                <ul class="list-unstyled">
-                  <h4>Reviews</h4>
-                  <li ng-repeat="review in person.reviews">
-                    <blockquote>
-                      <strong>{{review.stars}} Stars</strong>
-                      {{review.comment}}
-                      <cite> - by {{review.commentor}}</cite>
-                    </blockquote>
-                  </li>
-                </ul>
-
-                <form name="reviewForm" class="form-inline" ng-controller="ReviewController as ReviewCtrl"
-                                                            ng-submit="ReviewCtrl.addReview(person)">
-                  <blockquote>
-                    <b>{{ReviewCtrl.review.stars}} Stars</b>
-                    {{ReviewCtrl.review.comment}}
-                    <cite> - by {{ReviewCtrl.review.commentor}}</cite>
-                  </blockquote>
-                  <div class="form-group">
-                    <select class="form-control" ng-options="stars for stars in [5,4,3,2,1]"  title="Stars" ng-model="ReviewCtrl.review.stars">
-                      <option value="">Rate him</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="comment" class="sr-only">Your Comment</label>
-                    <input id="comment" placeholder="Your Comment" type="text" class="form-control" ng-model="ReviewCtrl.review.comment">
-                  </div>
-                  <div class="form-group">
-                    <label for="commentor" class="sr-only">Your name</label>
-                    <input id="commentor" placeholder="Your name" type="text" class="form-control form-your-name" ng-model="ReviewCtrl.review.commentor">
-                  </div>
-                  <input type="submit" value="submit" class="btn btn-default" />
-                </form>
-              </div>
-
+              <person-details ng-show="tab.isSelected(1)"></person-details>
+              <person-description ng-show="tab.isSelected(2)"></person-description>
+              <person-gallery ng-show="tab.isSelected(3)"></person-gallery>
+              <person-reviews ng-show="tab.isSelected(4)"></person-reviews>
             </div>
           </div>
         </div>
